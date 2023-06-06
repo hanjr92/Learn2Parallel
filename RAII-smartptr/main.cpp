@@ -4,7 +4,10 @@
 struct Node {
     std::unique_ptr<Node> next;
     Node* prev;
-
+// unique_ptr在超出作用域，即以下情况时它指向的对象会被摧毁：unique_ptr指向的对象被破坏;对象通过operator=（）或reset（）被指定到另一个指针）
+// unique_ptr还可能没有对象，这种情况被称为empty。
+// std::unique_ptr<int>p3=std::move(p1);// 转移所有权,那块内存归p3所有, p1成为无效的针.
+// p1.reset();//无效
     int value;
 
     Node(int val) : value(val), next(nullptr), prev(nullptr){
